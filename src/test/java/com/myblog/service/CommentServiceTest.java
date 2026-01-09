@@ -33,11 +33,10 @@ class CommentServiceTest {
 
     @BeforeEach
     void setUp() {
-        testComment = Comment.builder()
-            .id(1L)
-            .text("Test comment")
-            .postId(1L)
-            .build();
+        testComment = new Comment();
+        testComment.setId(1L);
+        testComment.setText("Test comment");
+        testComment.setPostId(1L);
     }
 
     @Test
@@ -75,10 +74,9 @@ class CommentServiceTest {
     @Test
     void testCreateComment() {
         // Given
-        CreateCommentRequest request = CreateCommentRequest.builder()
-            .text("New comment")
-            .postId(1L)
-            .build();
+        CreateCommentRequest request = new CreateCommentRequest();
+        request.setText("New comment");
+        request.setPostId(1L);
         
         when(commentDao.create(any(Comment.class))).thenReturn(testComment);
 
@@ -95,11 +93,10 @@ class CommentServiceTest {
     @Test
     void testUpdateComment() {
         // Given
-        UpdateCommentRequest request = UpdateCommentRequest.builder()
-            .id(1L)
-            .text("Updated comment")
-            .postId(1L)
-            .build();
+        UpdateCommentRequest request = new UpdateCommentRequest();
+        request.setId(1L);
+        request.setText("Updated comment");
+        request.setPostId(1L);
         
         when(commentDao.findById(1L)).thenReturn(Optional.of(testComment));
         when(commentDao.update(any(Comment.class))).thenReturn(testComment);
@@ -117,11 +114,10 @@ class CommentServiceTest {
     @Test
     void testUpdateCommentNotFound() {
         // Given
-        UpdateCommentRequest request = UpdateCommentRequest.builder()
-            .id(999L)
-            .text("Updated comment")
-            .postId(1L)
-            .build();
+        UpdateCommentRequest request = new UpdateCommentRequest();
+        request.setId(999L);
+        request.setText("Updated comment");
+        request.setPostId(1L);
         
         when(commentDao.findById(999L)).thenReturn(Optional.empty());
 

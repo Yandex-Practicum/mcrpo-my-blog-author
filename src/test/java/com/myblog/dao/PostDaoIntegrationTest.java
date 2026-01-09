@@ -42,11 +42,10 @@ class PostDaoIntegrationTest {
     @Test
     void testCreateAndFindPost() {
         // Given
-        Post post = Post.builder()
-            .title("Test Post")
-            .text("Test content")
-            .tags(Arrays.asList("tag1", "tag2"))
-            .build();
+        Post post = new Post();
+        post.setTitle("Test Post");
+        post.setText("Test content");
+        post.setTags(Arrays.asList("tag1", "tag2"));
 
         // When
         Post createdPost = postDao.create(post);
@@ -65,18 +64,16 @@ class PostDaoIntegrationTest {
     @Test
     void testFindAllPosts() {
         // Given
-        Post post1 = Post.builder()
-            .title("First Post")
-            .text("First content")
-            .tags(Arrays.asList("java"))
-            .build();
+        Post post1 = new Post();
+        post1.setTitle("First Post");
+        post1.setText("First content");
+        post1.setTags(Arrays.asList("java"));
         postDao.create(post1);
 
-        Post post2 = Post.builder()
-            .title("Second Post")
-            .text("Second content")
-            .tags(Arrays.asList("spring"))
-            .build();
+        Post post2 = new Post();
+        post2.setTitle("Second Post");
+        post2.setText("Second content");
+        post2.setTags(Arrays.asList("spring"));
         postDao.create(post2);
 
         // When
@@ -89,18 +86,16 @@ class PostDaoIntegrationTest {
     @Test
     void testSearchPostsByTitle() {
         // Given
-        Post post1 = Post.builder()
-            .title("Java Tutorial")
-            .text("Content")
-            .tags(Arrays.asList())
-            .build();
+        Post post1 = new Post();
+        post1.setTitle("Java Tutorial");
+        post1.setText("Content");
+        post1.setTags(Arrays.asList());
         postDao.create(post1);
 
-        Post post2 = Post.builder()
-            .title("Spring Framework")
-            .text("Content")
-            .tags(Arrays.asList())
-            .build();
+        Post post2 = new Post();
+        post2.setTitle("Spring Framework");
+        post2.setText("Content");
+        post2.setTags(Arrays.asList());
         postDao.create(post2);
 
         // When
@@ -114,18 +109,16 @@ class PostDaoIntegrationTest {
     @Test
     void testSearchPostsByTag() {
         // Given
-        Post post1 = Post.builder()
-            .title("Post 1")
-            .text("Content")
-            .tags(Arrays.asList("java", "spring"))
-            .build();
+        Post post1 = new Post();
+        post1.setTitle("Post 1");
+        post1.setText("Content");
+        post1.setTags(Arrays.asList("java", "spring"));
         postDao.create(post1);
 
-        Post post2 = Post.builder()
-            .title("Post 2")
-            .text("Content")
-            .tags(Arrays.asList("python"))
-            .build();
+        Post post2 = new Post();
+        post2.setTitle("Post 2");
+        post2.setText("Content");
+        post2.setTags(Arrays.asList("python"));
         postDao.create(post2);
 
         // When
@@ -139,11 +132,10 @@ class PostDaoIntegrationTest {
     @Test
     void testUpdatePost() {
         // Given
-        Post post = Post.builder()
-            .title("Original Title")
-            .text("Original content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        Post post = new Post();
+        post.setTitle("Original Title");
+        post.setText("Original content");
+        post.setTags(Arrays.asList("tag1"));
         Post createdPost = postDao.create(post);
 
         // When
@@ -161,11 +153,10 @@ class PostDaoIntegrationTest {
     @Test
     void testDeletePost() {
         // Given
-        Post post = Post.builder()
-            .title("Test Post")
-            .text("Test content")
-            .tags(Arrays.asList())
-            .build();
+        Post post = new Post();
+        post.setTitle("Test Post");
+        post.setText("Test content");
+        post.setTags(Arrays.asList());
         Post createdPost = postDao.create(post);
 
         // When
@@ -179,11 +170,10 @@ class PostDaoIntegrationTest {
     @Test
     void testIncrementLikes() {
         // Given
-        Post post = Post.builder()
-            .title("Test Post")
-            .text("Test content")
-            .tags(Arrays.asList())
-            .build();
+        Post post = new Post();
+        post.setTitle("Test Post");
+        post.setText("Test content");
+        post.setTags(Arrays.asList());
         Post createdPost = postDao.create(post);
 
         // When
@@ -199,9 +189,23 @@ class PostDaoIntegrationTest {
     @Test
     void testGetTotalCount() {
         // Given
-        postDao.create(Post.builder().title("Post 1").text("Content").tags(Arrays.asList()).build());
-        postDao.create(Post.builder().title("Post 2").text("Content").tags(Arrays.asList()).build());
-        postDao.create(Post.builder().title("Post 3").text("Content").tags(Arrays.asList()).build());
+        Post post1 = new Post();
+        post1.setTitle("Post 1");
+        post1.setText("Content");
+        post1.setTags(Arrays.asList());
+        postDao.create(post1);
+        
+        Post post2 = new Post();
+        post2.setTitle("Post 2");
+        post2.setText("Content");
+        post2.setTags(Arrays.asList());
+        postDao.create(post2);
+        
+        Post post3 = new Post();
+        post3.setTitle("Post 3");
+        post3.setText("Content");
+        post3.setTags(Arrays.asList());
+        postDao.create(post3);
 
         // When
         int count = postDao.getTotalCount("");

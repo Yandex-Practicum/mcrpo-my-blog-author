@@ -34,14 +34,13 @@ class PostServiceTest {
 
     @BeforeEach
     void setUp() {
-        testPost = Post.builder()
-            .id(1L)
-            .title("Test Post")
-            .text("Test content")
-            .tags(Arrays.asList("tag1", "tag2"))
-            .likesCount(0)
-            .commentsCount(0)
-            .build();
+        testPost = new Post();
+        testPost.setId(1L);
+        testPost.setTitle("Test Post");
+        testPost.setText("Test content");
+        testPost.setTags(Arrays.asList("tag1", "tag2"));
+        testPost.setLikesCount(0);
+        testPost.setCommentsCount(0);
     }
 
     @Test
@@ -85,11 +84,10 @@ class PostServiceTest {
     @Test
     void testCreatePost() {
         // Given
-        CreatePostRequest request = CreatePostRequest.builder()
-            .title("New Post")
-            .text("New content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("New Post");
+        request.setText("New content");
+        request.setTags(Arrays.asList("tag1"));
         
         when(postDao.create(any(Post.class))).thenReturn(testPost);
 
@@ -106,12 +104,11 @@ class PostServiceTest {
     @Test
     void testUpdatePost() {
         // Given
-        UpdatePostRequest request = UpdatePostRequest.builder()
-            .id(1L)
-            .title("Updated Post")
-            .text("Updated content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        UpdatePostRequest request = new UpdatePostRequest();
+        request.setId(1L);
+        request.setTitle("Updated Post");
+        request.setText("Updated content");
+        request.setTags(Arrays.asList("tag1"));
         
         when(postDao.findById(1L)).thenReturn(Optional.of(testPost));
         when(postDao.update(any(Post.class))).thenReturn(testPost);
@@ -129,12 +126,11 @@ class PostServiceTest {
     @Test
     void testUpdatePostNotFound() {
         // Given
-        UpdatePostRequest request = UpdatePostRequest.builder()
-            .id(999L)
-            .title("Updated Post")
-            .text("Updated content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        UpdatePostRequest request = new UpdatePostRequest();
+        request.setId(999L);
+        request.setTitle("Updated Post");
+        request.setText("Updated content");
+        request.setTags(Arrays.asList("tag1"));
         
         when(postDao.findById(999L)).thenReturn(Optional.empty());
 
@@ -159,13 +155,12 @@ class PostServiceTest {
     @Test
     void testIncrementLikes() {
         // Given
-        Post likedPost = Post.builder()
-            .id(1L)
-            .title("Test Post")
-            .text("Test content")
-            .likesCount(5)
-            .commentsCount(0)
-            .build();
+        Post likedPost = new Post();
+        likedPost.setId(1L);
+        likedPost.setTitle("Test Post");
+        likedPost.setText("Test content");
+        likedPost.setLikesCount(5);
+        likedPost.setCommentsCount(0);
         
         when(postDao.findById(1L)).thenReturn(Optional.of(likedPost));
 

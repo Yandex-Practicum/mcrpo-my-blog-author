@@ -67,11 +67,10 @@ class PostControllerIntegrationTest {
 
     @Test
     void testCreatePost() throws Exception {
-        CreatePostRequest request = CreatePostRequest.builder()
-            .title("New Post")
-            .text("New content")
-            .tags(Arrays.asList("tag1", "tag2"))
-            .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("New Post");
+        request.setText("New content");
+        request.setTags(Arrays.asList("tag1", "tag2"));
 
         mockMvc.perform(post("/api/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -87,11 +86,10 @@ class PostControllerIntegrationTest {
     @Test
     void testGetPostById() throws Exception {
         // Create a post first
-        CreatePostRequest request = CreatePostRequest.builder()
-            .title("Test Post")
-            .text("Test content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("Test Post");
+        request.setText("Test content");
+        request.setTags(Arrays.asList("tag1"));
 
         String response = mockMvc.perform(post("/api/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -111,11 +109,10 @@ class PostControllerIntegrationTest {
     @Test
     void testUpdatePost() throws Exception {
         // Create a post first
-        CreatePostRequest createRequest = CreatePostRequest.builder()
-            .title("Original Title")
-            .text("Original content")
-            .tags(Arrays.asList("tag1"))
-            .build();
+        CreatePostRequest createRequest = new CreatePostRequest();
+        createRequest.setTitle("Original Title");
+        createRequest.setText("Original content");
+        createRequest.setTags(Arrays.asList("tag1"));
 
         String response = mockMvc.perform(post("/api/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -126,12 +123,11 @@ class PostControllerIntegrationTest {
         Long postId = objectMapper.readTree(response).get("id").asLong();
 
         // Update the post
-        UpdatePostRequest updateRequest = UpdatePostRequest.builder()
-            .id(postId)
-            .title("Updated Title")
-            .text("Updated content")
-            .tags(Arrays.asList("tag2"))
-            .build();
+        UpdatePostRequest updateRequest = new UpdatePostRequest();
+        updateRequest.setId(postId);
+        updateRequest.setTitle("Updated Title");
+        updateRequest.setText("Updated content");
+        updateRequest.setTags(Arrays.asList("tag2"));
 
         mockMvc.perform(put("/api/posts/" + postId)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -144,11 +140,10 @@ class PostControllerIntegrationTest {
     @Test
     void testDeletePost() throws Exception {
         // Create a post first
-        CreatePostRequest request = CreatePostRequest.builder()
-            .title("Post to Delete")
-            .text("Content")
-            .tags(Arrays.asList())
-            .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("Post to Delete");
+        request.setText("Content");
+        request.setTags(Arrays.asList());
 
         String response = mockMvc.perform(post("/api/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -170,11 +165,10 @@ class PostControllerIntegrationTest {
     @Test
     void testIncrementLikes() throws Exception {
         // Create a post first
-        CreatePostRequest request = CreatePostRequest.builder()
-            .title("Post with Likes")
-            .text("Content")
-            .tags(Arrays.asList())
-            .build();
+        CreatePostRequest request = new CreatePostRequest();
+        request.setTitle("Post with Likes");
+        request.setText("Content");
+        request.setTags(Arrays.asList());
 
         String response = mockMvc.perform(post("/api/posts")
                 .contentType(MediaType.APPLICATION_JSON)
